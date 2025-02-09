@@ -75,20 +75,24 @@ Avoid using the following class names, as they are reserved by the script and ma
 
 ### Setting and Getting Values
 
+Set a value to an input with a specific ID
 ```javascript
-// Set a value to an input with a specific ID
 document.getElementById("myip").value = "192.168.0.1";
+```
 
-// Get the value of an input with a specific ID
-console.log(document.getElementById("myip").value);
+Get the value of an input with a specific ID
+```javascript
+document.getElementById("myip");
+```
 
-// Set the same value to all inputs with a specific class
-const value = "127.0.0.1";
-document.querySelectorAll("input.direccionIP").forEach(input => input.value = value);
+Set the same value to all inputs with a specific class
+```javascript
+document.querySelectorAll("input.IPAdress").forEach(input => input.value = 127.0.0.1);
+```
 
-// Get values from all inputs with a specific class
-const inputs = document.querySelectorAll("input.direccionIP2");
-inputs.forEach(input => console.log(input.value)); // Hidden input values will also appear
+Get values from all inputs with a specific class
+```javascript
+document.querySelectorAll("input.IPAdress").forEach(input => console.log(input.value)); // Hidden input values will also appear
 ```
 
 > [!TIP]  

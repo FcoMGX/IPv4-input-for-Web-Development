@@ -341,9 +341,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (hasInvalidEntries) {
       e.preventDefault();
-      alert("Hay direcciones IP introducidas no válidas");
+      let pageLang;
+    
+      if (document.documentElement.lang) {
+        pageLang = document.documentElement.lang.slice(0, 2).toLowerCase();
+      }
+      else if (navigator.languages && navigator.languages.length > 0) {
+        pageLang = navigator.languages[0].slice(0, 2).toLowerCase();
+      }
+      else if (navigator.language) {
+        pageLang = navigator.language.slice(0, 2).toLowerCase();
+      }
+      else {
+        pageLang = 'en';
+      }
+
+      const messages = {
+        'es': "Hay direcciones IP introducidas no válidas.",
+        'en': "Invalid IP addresses entered.",
+        'fr': "Adresses IP entrées non valides",
+        'it': "Ci sono indirizzi IP non validi inseriti",
+        'pt': "Endereços IP inválidos inseridos",
+        'de': "Es wurden ungültige IP-Adressen eingegeben",
+        'zh': "輸入的 IP 位址無效",
+        'ja': "無効な IP アドレスが入力されています"
+      };
+  
+      if (!messages.hasOwnProperty(pageLang)) {
+        pageLang = 'en';
+      }
+    
+      alert(messages[pageLang]);
       return false;
-    }
+    }    
+    
     return formIsValid;
   });
 

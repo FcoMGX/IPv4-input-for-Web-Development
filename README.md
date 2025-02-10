@@ -68,7 +68,7 @@ Avoid using the following class names, as they are reserved by the script and ma
 - `ipv4-input`
 - `ipv4-container`
 - `ipv4-hidden-input`
-- `error`
+- `.ipv4-input.error` (redefining error class for .ipv4-input class)
 
 > [!CAUTION]  
 > Overriding these classes may lead to unexpected behaviour in the script.

@@ -79,28 +79,28 @@ Avoid using the following class names, as they are reserved by the script and ma
 
 ### Setting and Getting Values
 
-Set a value to an input with a specific ID
+Set a value (`127.0.0.1`) to an input with a specific **ID** (`myip`):
 ```javascript
-document.getElementById("myip").value = "192.168.0.1";
+document.getElementById("myip").value = "127.0.0.1";
 ```
 
-Get the value of an input with a specific ID
+Get the value of an input with a specific **ID** (`myip`):
 ```javascript
 document.getElementById("myip");
 ```
 
-Set the same value to all inputs with a specific class
+Set the same value (`127.0.0.1`) to all inputs with a specific **class** (`IPAdress`):
 ```javascript
 document.querySelectorAll("input.IPAdress").forEach(input => input.value = 127.0.0.1);
 ```
 
-Get values from all inputs with a specific class
+Get values from all inputs with a specific **class** (`IPAdress`):
 ```javascript
 document.querySelectorAll("input.IPAdress").forEach(input => console.log(input.value)); // Hidden input values will also appear
 ```
 
 > [!WARNING]  
-> When retrieving IPv4 values using `document.querySelectorAll(".ipv4-input")`, you will also retrieve the hidden input used for value management. To avoid this, use `document.querySelectorAll("input.ipv4-input")` to ensure you target only the visible inputs.
+> When retrieving IPv4 values using `document.querySelectorAll(".ipv4-input")`, you will also retrieve the hidden input used for value management, so that you will get the value duplicated. To avoid this, use `document.querySelectorAll("input.ipv4-input")` to ensure you target only the visible inputs.
 
 > [!TIP]  
 > **jQuery Integration**  
@@ -119,7 +119,7 @@ document.querySelectorAll("input.IPAdress").forEach(input => console.log(input.v
 > **By Class (Multiple Elements):**  
 >  Set all inputs with class .ipAdress:  
 > ```javascript
-> $(“input.ipAdress").val("172.16.254.1");  
+> $("input.ipAdress").val("172.16.254.1");  
 >  ```
 > Get values from all .ipAdress inputs:
 > ```javascript

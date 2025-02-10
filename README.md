@@ -103,7 +103,7 @@ document.querySelectorAll("input.IPAdress").forEach(input => console.log(input.v
 > When retrieving IPv4 values using `document.querySelectorAll(".ipv4-input")`, you will also retrieve the hidden input used for value management, so that you will get the value duplicated. To avoid this, use `document.querySelectorAll("input.ipv4-input")` to ensure you target only the visible inputs.
 
 > [!TIP]  
-> #### jQuery Integration
+> ### jQuery Integration
 > You can also easily get/set values using JQuery. For example, for **class** `.ipAdress` and **ID** `#myip`:  
 >  
 > **By ID (Single Element):**  

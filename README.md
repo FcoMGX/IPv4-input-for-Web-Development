@@ -1,8 +1,15 @@
 # IPv4 Input Handler
 
-This project provides a robust JavaScript utility to manage, validate, and style IPv4 address inputs. It dynamically replaces `<input type="ipv4">` elements with an intuitive interface for entering and managing IPv4 addresses.
+This project provides a robust JavaScript utility to manage, validate, and style IP (IPv4) addresses inputs. It dynamically replaces `<input type="ipv4">` elements with an intuitive interface for entering and managing IPv4 addresses.
 
 ---
+
+## How to use the script 
+To integrate the IPv4 component into your webpage project, add the following script in the `<head>` of the HTML:
+
+```html
+<script src="https://fcomgx.github.io/IPv4-input-for-Web-Development/ipv4Script.js"></script>
+```
 
 ## Features
 
@@ -25,21 +32,25 @@ This project provides a robust JavaScript utility to manage, validate, and style
 The following styles are applied by default unless overridden:
 
 ```css
+// Style for each individual octet
 .ipv4-input {
     width: 35px;
     text-align: center;
 }
 
+// Style for the full IP container
 .ipv4-container {
     display: flex;
     align-items: center;
     width: fit-content;
 }
 
+// Style for the separators between octets (the points " . ")
 .ipv4-container span {
     margin: 0 5px;
 }
 
+// Style for error in octet
 .ipv4-input.error {
     background-color: #ffcccc;
 }
@@ -47,13 +58,6 @@ The following styles are applied by default unless overridden:
 
 > [!NOTE]  
 > The script will automatically apply these styles if none are explicitly defined.
-
----
-
-## Warnings
-
-> [!WARNING]  
-> When retrieving IPv4 values using `document.querySelectorAll(".ipv4-input")`, you will also retrieve the hidden input used for value management. To avoid this, use `document.querySelectorAll("input.ipv4-input")` to ensure you target only the visible inputs.
 
 ---
 
@@ -95,51 +99,78 @@ Get values from all inputs with a specific class
 document.querySelectorAll("input.IPAdress").forEach(input => console.log(input.value)); // Hidden input values will also appear
 ```
 
+> [!WARNING]  
+> When retrieving IPv4 values using `document.querySelectorAll(".ipv4-input")`, you will also retrieve the hidden input used for value management. To avoid this, use `document.querySelectorAll("input.ipv4-input")` to ensure you target only the visible inputs.
+
 > [!TIP]  
-> Use the `document.querySelectorAll("input.[class]")` approach to avoid retrieving hidden inputs accidentally.
+> **jQuery Integration**  
+> You can also easily get/set values using JQuery. For example, for **class** `.ipAdress` and **ID** `#myip`:  
+>  
+> **By ID (Single Element):**  
+> Set value:
+> ```javascript  
+> $("#myip").val("10.0.0.5");  
+> ```
+>  Get value:
+>  ```javascript
+> const currentIP = $("#myip").val();  
+> ```  
+>  
+> **By Class (Multiple Elements):**  
+>  Set all inputs with class .ipAdress:  
+> ```javascript
+> $(“input.ipAdress").val("172.16.254.1");  
+>  ```
+> Get values from all .ipAdress inputs:
+> ```javascript
+> $(“input.ipAdress”).val()
+> ```
+
+> [!NOTE]
+> Class selectors target ALL matching elements if the `input` is not explicitly indicated.
 
 ### Dynamically Adding IPv4 Inputs
 
 Add an IPv4 input at the end of the body:
 
 ```javascript
-document.body.insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip7" class="direccionIP3" name="ip5" /><br /><br />');
+document.body.insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip7" class="direccionIP3" name="ip5"');
 ```
 
 Add an IPv4 input at the beginning of the body:
 
 ```javascript
-document.body.insertAdjacentHTML('afterbegin', '<input type="ipv4" id="myip8" class="direccionIP3" name="ip6" /><br /><br />');
+document.body.insertAdjacentHTML('afterbegin', '<input type="ipv4" id="myip8" class="direccionIP3" name="ip6"');
 ```
 
 Add an IPv4 input inside a form at the end:
 
 ```javascript
-document.querySelector('form').insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip9" class="direccionIP4" name="ip7" /><br /><br />');
+document.querySelector('form').insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip9" class="direccionIP4" name="ip7"');
 ```
 
 Add an IPv4 input inside a form at the beginning:
 
 ```javascript
-document.querySelector('form').insertAdjacentHTML('afterbegin', '<input type="ipv4" id="myip10" class="direccionIP4" name="ip8" /><br /><br />');
+document.querySelector('form').insertAdjacentHTML('afterbegin', '<input type="ipv4" id="myip10" class="direccionIP4" name="ip8"');
 ```
 
 Add an IPv4 input before a specific element (e.g., a button):
 
 ```javascript
-document.querySelector('button').insertAdjacentHTML('beforebegin', '<input type="ipv4" id="myip11" class="direccionIP5" name="ip9" /><br /><br />');
+document.querySelector('button').insertAdjacentHTML('beforebegin', '<input type="ipv4" id="myip11" class="direccionIP5" name="ip9"');
 ```
 
 Add an IPv4 input after a specific element (e.g., a button):
 
 ```javascript
-document.querySelector('button').insertAdjacentHTML('afterend', '<input type="ipv4" id="myip12" class="direccionIP5" name="ip10" /><br /><br />');
+document.querySelector('button').insertAdjacentHTML('afterend', '<input type="ipv4" id="myip12" class="direccionIP5" name="ip10"');
 ```
 
 Add an IPv4 input inside a specific div (e.g., a div with ID "contenedor"):
 
 ```javascript
-document.querySelector('#contenedor').insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip13" class="direccionIP6" name="ip11" /><br /><br />');
+document.querySelector('#contenedor').insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip13" class="direccionIP6" name="ip11"');
 ```
 
 ---

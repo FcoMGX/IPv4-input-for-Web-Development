@@ -359,10 +359,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const messages = {
         'es': "Hay direcciones IP introducidas no válidas.",
         'en': "Invalid IP addresses entered.",
-        'fr': "Adresses IP entrées non valides",
-        'it': "Ci sono indirizzi IP non validi inseriti",
-        'pt': "Endereços IP inválidos inseridos",
-        'de': "Es wurden ungültige IP-Adressen eingegeben",
+        'fr': "Adresses IP entrées non valides.",
+        'it': "Ci sono indirizzi IP non validi inseriti.",
+        'pt': "Endereços IP inválidos inseridos.",
+        'de': "Es wurden ungültige IP-Adressen eingegeben.",
         'zh': "輸入的 IP 位址無效",
         'ja': "無効な IP アドレスが入力されています"
       };

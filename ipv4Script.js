@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (hasInvalidEntries) {
       e.preventDefault();
       let pageLang;
-    
+
       if (document.documentElement.lang) {
         pageLang = document.documentElement.lang.slice(0, 2).toLowerCase();
       }
@@ -366,17 +366,28 @@ document.addEventListener("DOMContentLoaded", () => {
         'zh': "輸入的 IP 位址無效",
         'ja': "無効な IP アドレスが入力されています"
       };
-  
+
       if (!messages.hasOwnProperty(pageLang)) {
         pageLang = 'en';
       }
-    
+
       alert(messages[pageLang]);
       return false;
-    }    
-    
+    }
+
     return formIsValid;
   });
+
+  document.addEventListener("reset", (e) => {
+    if (e.target.tagName === "FORM") {
+      setTimeout(() => {
+        e.target.querySelectorAll(".ipv4-input").forEach((input) => {
+          input.classList.remove("error");
+        });
+      }, 0);
+    }
+  });
+
 
   // ======================
   // Error Style Injection

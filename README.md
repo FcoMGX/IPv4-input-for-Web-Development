@@ -1,77 +1,87 @@
 # IPv4 Input Handler
 
-This project provides a robust JavaScript utility to manage, validate, and style IP (IPv4) addresses inputs. It dynamically replaces `<input type="ipv4">` elements with an intuitive interface for entering and managing IPv4 addresses.
+This project provides a robust JavaScript utility to manage, validate, and style IP (IPv4) addresses inputs. It dynamically replaces `<input type="ipv4">` elements with an intuitive, segmented interface for entering and managing IPv4 addresses.
 
 ---
 
-## How to use the script 
-To integrate the IPv4 component into your webpage project, add the following script in the `<head>` of the HTML:
+## How to use the script
+To integrate the IPv4 component into your webpage project, simply include the script in the `<head>` of your HTML document:
 
 ```html
-<script src="https://fcomgx.github.io/IPv4-input-for-Web-Development/ipv4Script.js"></script>
+<script src="[https://fcomgx.github.io/IPv4-input-for-Web-Development/ipv4Script.js](https://fcomgx.github.io/IPv4-input-for-Web-Development/ipv4Script.js)"></script>
+
+```
+
+Then, use the custom input type in your forms:
+
+```html
+<input type="ipv4" name="my_ip_address" id="ip1">
+
 ```
 
 ## Features
 
 ### General Overview
 
-- **Validation**: Ensures that each octet in the IPv4 address is a number between `0` and `255`.
-- **Input Restriction**: Prevents users from entering non-numeric characters or invalid IP formats.
-- **Dynamic Value Setting**: Enables programmatic setting and retrieval of IPv4 values.
-- **Form Submission Validation**: Checks the validity of entered IPv4 addresses before form submission and alerts the user if invalid entries exist.
-- **Styling**: Applies default styles for a clean and consistent appearance, while allowing user-defined styles.
-- **Error Indication**: Highlights invalid octets with a distinct background colour.
+* **Segmentation**: Splits the IP address into 4 distinct input fields (octets) for better UX.
+* **Validation**: Ensures that each octet is a number between `0` and `255`.
+* **Input Restriction**: Prevents users from entering non-numeric characters.
+* **Auto-Focus**: Automatically moves the cursor to the next octet after typing 3 digits or pressing the period key (`.`).
+* **Autofill & Paste Support**: Intelligently handles pasting full IP addresses or browser autofill, distributing the values across the octets automatically.
+* **Native Error Reporting**: Uses the browser's native constraint validation API (popovers/tooltips) instead of intrusive `alert()` boxes.
+* **Multilanguage Support**: Error messages automatically adapt to the user's browser language (Supports: EN, ES, FR, IT, PT, DE, ZH, JA).
+* **Dynamic Value Setting**: Enables programmatic setting and retrieval of IPv4 values via JavaScript.
 
-> [!IMPORTANT]  
-> This utility ensures the integrity of IPv4 address inputs by strictly enforcing validation and formatting rules.
+> [!IMPORTANT]
+> This utility ensures the integrity of IPv4 inputs by strictly enforcing format rules and synchronising values to a hidden input field for form submission.
 
 ---
 
 ## Default Styles
 
-The following styles are applied by default unless overridden:
+The script applies default styles to ensure a clean appearance. You can override these in your own CSS file.
+
+**Default applied styles:**
 
 ```css
-// Style for each individual octet
+/* Style for each individual octet */
 .ipv4-input {
-    width: 35px;
+    width: 35px; /* Can be overridden to 50px for better visibility */
     text-align: center;
 }
 
-// Style for the full IP container
+/* Style for the full IP container */
 .ipv4-container {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     width: fit-content;
+    vertical-align: middle;
 }
 
-// Style for the separators between octets (the points " . ")
+/* Style for the separators between octets (" . ") */
 .ipv4-container span {
     margin: 0 5px;
 }
 
-// Style for error in octet
+/* Style for error indication (applied dynamically) */
 .ipv4-input.error {
     background-color: #ffcccc;
 }
-```
 
-> [!NOTE]  
-> The script will automatically apply these styles if none are explicitly defined.
+```
 
 ---
 
 ## Reserved Class Names
 
-Avoid using the following class names, as they are reserved by the script and may cause conflicts:
+Avoid using the following class names in your HTML to prevent conflicts:
 
-- `ipv4-input`
-- `ipv4-container`
-- `ipv4-hidden-input`
-- `.ipv4-input.error` (redefining error class for `.ipv4-input` class)
+* `ipv4-input`
+* `ipv4-container`
+* `ipv4-hidden-input`
 
-> [!CAUTION]  
-> Overriding these classes may lead to unexpected behaviour in the script.
+> [!CAUTION]
+> Overriding these class names manually may break the script's functionality.
 
 ---
 
@@ -79,116 +89,87 @@ Avoid using the following class names, as they are reserved by the script and ma
 
 ### Setting and Getting Values
 
-Set a value (`127.0.0.1`) to an input with a specific **ID** (`myip`):
+**Using Vanilla JavaScript:**
+
+Set a value (`192.168.1.1`) to an input with a specific **ID** (`myip`):
+
 ```javascript
-document.getElementById("myip").value = "127.0.0.1";
+document.getElementById("myip").value = "192.168.1.1";
+
 ```
 
 Get the value of an input with a specific **ID** (`myip`):
+
 ```javascript
-document.getElementById("myip");
+console.log(document.getElementById("myip").value); // Outputs: "192.168.1.1"
+
 ```
 
-Set the same value (`127.0.0.1`) to all inputs with a specific **class** (`IPAdress`):
+**Using jQuery:**
+
+The script ensures full compatibility with jQuery's `.val()` method.
+
+Set value by ID:
+
 ```javascript
-document.querySelectorAll("input.IPAdress").forEach(input => input.value = 127.0.0.1);
+$("#myip").val("10.0.0.5");
+
 ```
 
-Get values from all inputs with a specific **class** (`IPAdress`):
+Get value by ID:
+
 ```javascript
-document.querySelectorAll("input.IPAdress").forEach(input => console.log(input.value)); // Hidden input values will also appear
+const currentIP = $("#myip").val();
+
 ```
-
-> [!WARNING]  
-> When retrieving IPv4 values using `document.querySelectorAll(".ipv4-input")`, you will also retrieve the hidden input used for value management, so that you will get the value duplicated. To avoid this, use `document.querySelectorAll("input.ipv4-input")` to ensure you target only the visible inputs.
-
-> [!TIP]  
-> ### jQuery Integration
-> You can also easily get/set values using JQuery. For example, for **class** `.ipAdress` and **ID** `#myip`:  
->  
-> **By ID (Single Element):**  
-> Set value:
-> ```javascript  
-> $("#myip").val("10.0.0.5");  
-> ```
->  Get value:
->  ```javascript
-> const currentIP = $("#myip").val();  
-> ```  
->  
-> **By Class (Multiple Elements):**  
->  Set all inputs with class .ipAdress:  
-> ```javascript
-> $("input.ipAdress").val("172.16.254.1");  
->  ```
-> Get values from all .ipAdress inputs:
-> ```javascript
-> $(“input.ipAdress”).val()
-> ```
 
 > [!NOTE]
-> Class selectors target ALL matching elements if the `input` is not explicitly indicated.
+> The script intelligently handles selectors. Using `document.querySelectorAll(".your-class")` will now only target the visual container, preventing duplicate values in your logic.
+
+### Console Warnings
+
+If you try to set an invalid IP address programmatically via JavaScript (e.g., `999.999.999.999`), the script will:
+
+1. Clear the visual inputs to prevent invalid states.
+2. Log a warning in the browser console (mimicking native browser behaviour).
+
+```javascript
+document.getElementById("myip").value = "999.0.0.1";
+// Console Warning: The specified value '999.0.0.1' is not a valid IPv4 address.
+
+```
 
 ### Dynamically Adding IPv4 Inputs
+
+You can dynamically insert inputs into the DOM, and the script will automatically initialise them.
 
 Add an IPv4 input at the end of the body:
 
 ```javascript
-document.body.insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip7" class="direccionIP3" name="ip5"');
+document.body.insertAdjacentHTML('beforeend', '<input type="ipv4" id="new_ip" name="ip_dynamic">');
+
 ```
 
-Add an IPv4 input at the beginning of the body:
+Add an IPv4 input inside a form:
 
 ```javascript
-document.body.insertAdjacentHTML('afterbegin', '<input type="ipv4" id="myip8" class="direccionIP3" name="ip6"');
-```
+document.querySelector('form').insertAdjacentHTML('beforeend', '<input type="ipv4" name="server_ip">');
 
-Add an IPv4 input inside a form at the end:
-
-```javascript
-document.querySelector('form').insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip9" class="direccionIP4" name="ip7"');
-```
-
-Add an IPv4 input inside a form at the beginning:
-
-```javascript
-document.querySelector('form').insertAdjacentHTML('afterbegin', '<input type="ipv4" id="myip10" class="direccionIP4" name="ip8"');
-```
-
-Add an IPv4 input before a specific element (e.g., a button):
-
-```javascript
-document.querySelector('button').insertAdjacentHTML('beforebegin', '<input type="ipv4" id="myip11" class="direccionIP5" name="ip9"');
-```
-
-Add an IPv4 input after a specific element (e.g., a button):
-
-```javascript
-document.querySelector('button').insertAdjacentHTML('afterend', '<input type="ipv4" id="myip12" class="direccionIP5" name="ip10"');
-```
-
-Add an IPv4 input inside a specific div (e.g., a div with ID "contenedor"):
-
-```javascript
-document.querySelector('#contenedor').insertAdjacentHTML('beforeend', '<input type="ipv4" id="myip13" class="direccionIP6" name="ip11"');
 ```
 
 ---
 
 ## Form Validation
 
-This script validates IPv4 inputs during form submission:
+The script integrates seamlessly with standard HTML forms. When a user attempts to submit a form:
 
-- Ensures that all octets are within the range `0-255`.
-- Prevents submission if any IPv4 input contains incomplete or invalid data.
-- Converts valid IPv4 inputs into the hidden input for submission.
-- Alerts the user with an error message for invalid entries.
+* **Validation**: It checks if all octets are present and within the `0-255` range.
+* **Native Feedback**: If an error is found (e.g., a number > 255), the browser will automatically scroll to the field, focus it, and display a native error message (e.g., "Invalid octet") in the user's language.
+* **Submission Block**: The form submission is prevented until the error is resolved.
 
-> [!NOTE]  
-> Form validation ensures no invalid IPv4 address is submitted, maintaining data integrity.
-
-To trigger validation, simply use the standard form submission process, and the script will handle the rest automatically.
+> [!NOTE]
+> No extra configuration is needed. Just add `required` to your `<input type="ipv4">` if the field is mandatory.
 
 ---
 
-This README provides a detailed overview of the script's functionality, features, and usage examples. If you have any questions or need further clarification, feel free to reach out!
+This README provides a detailed overview of the script's functionality. If you encounter any issues or have feature requests, please check the source code or open an issue.

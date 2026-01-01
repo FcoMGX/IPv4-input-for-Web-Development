@@ -9,8 +9,7 @@ This project provides a robust JavaScript utility to manage, validate, and style
 To integrate the IPv4 component into your webpage project, simply include the script in the `<head>` of your HTML document:
 
 ```html
-<script src="[https://fcomgx.github.io/IPv4-input-for-Web-Development/ipv4Script.js](https://fcomgx.github.io/IPv4-input-for-Web-Development/ipv4Script.min.js)"></script>
-
+<script src="https://fcomgx.github.io/IPv4-input-for-Web-Development/ipv4Script.min.js"></script>
 ```
 
 Then, use the custom input type in your forms:

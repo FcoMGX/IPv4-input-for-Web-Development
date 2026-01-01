@@ -5,6 +5,7 @@ This project provides a robust JavaScript utility to manage, validate, and style
 ---
 
 ## How to use the script
+
 To integrate the IPv4 component into your webpage project, simply include the script in the `<head>` of your HTML document:
 
 ```html
